@@ -5,7 +5,7 @@ export const BoxContainer = styled.div`
     background-color: var(--shape);
 
     padding: 1.5rem 2rem;
-    border-radius: 5px;
+    border-radius: 0.31rem;
 
     header {
         display: flex;

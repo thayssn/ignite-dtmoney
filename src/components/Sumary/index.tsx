@@ -7,9 +7,9 @@ import { SumaryBox } from "./SumaryBox";
 export function Sumary() {
     return(
         <SumaryContainer>
-            <SumaryBox image={income} title="Entradas" value={1000.43}></SumaryBox>
-            <SumaryBox image={income} title="Entradas" value={500}></SumaryBox>
-            <SumaryBox image={income} title="Entradas" value={1500.43}></SumaryBox>
+            <SumaryBox image={income} title="Entradas" value={1000.434343}></SumaryBox>
+            <SumaryBox image={outcome} title="Saídas" value={500}></SumaryBox>
+            <SumaryBox image={total} title="Total" value={1500.43} highlight></SumaryBox>
         </SumaryContainer>
     )
 }
