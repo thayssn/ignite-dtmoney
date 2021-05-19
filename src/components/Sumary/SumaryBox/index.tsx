@@ -11,8 +11,8 @@ interface SumaryBoxProps {
 
 export function SumaryBox(props: SumaryBoxProps) {
     return(
-        <BoxContainer>
-            <header className={props.highlight ? 'highlight-background' : ''}>
+        <BoxContainer className={props.highlight ? 'highlight-background' : ''}>
+            <header>
                 <p>{props.title}</p>
                 <img src={props.image} alt={props.title}></img> 
             </header>
