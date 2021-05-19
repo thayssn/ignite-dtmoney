@@ -20,7 +20,7 @@ export const TransactionsTableContainer = styled.div`
         td{
             padding: 1rem 2rem;
             border: 0;
-            border-radius: 0.31rem;
+            border-radius: var(--border-radius);
 
             color: var(--body-text);
             background-color: var(--shape);

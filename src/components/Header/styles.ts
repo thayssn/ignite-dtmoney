@@ -15,21 +15,12 @@ export const Content = styled.div`
     align-items: center;
 
     button{
+        color: #FFF;
+        background-color: var(--light-purple);
+
         font-size: 1rem;
         line-height: 1.5rem;
         
-        color: #FFF;
-        background-color: var(--light-purple);
-        
         padding: 0.75rem 2rem;
-
-        border: 0;
-        border-radius: 0.31rem;
-
-        transition: filter 0.2s;
-
-        &:hover{
-            filter: brightness(0.9);
-        }
     }
 `

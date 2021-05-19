@@ -9,14 +9,14 @@ interface SumaryBoxProps {
     highlight?: boolean
 }
 
-export function SumaryBox(props: SumaryBoxProps) {
+export function SumaryBox({ highlight, title, image, value}: SumaryBoxProps) {
     return(
-        <BoxContainer className={props.highlight ? 'highlight-background' : ''}>
+        <BoxContainer className={highlight ? 'highlight-background' : ''}>
             <header>
-                <p>{props.title}</p>
-                <img src={props.image} alt={props.title}></img> 
+                <p>{title}</p>
+                <img src={image} alt={title}></img> 
             </header>
-            <strong>{props.value.toLocaleString('pt-br', currencyFormat)}</strong>
+            <strong>{value.toLocaleString('pt-br', currencyFormat)}</strong>
         </BoxContainer>
     )
 }
