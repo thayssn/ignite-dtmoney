@@ -1,12 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { TransactionsTableContainer } from "./styles";
+import { toBRLCurrency } from '../../utils'
+
+interface Transaction {
+    id: number,
+    type: string,
+    title: string,
+    amount: number,
+    category: string,
+    createdAt: string
+}
 
 export function TransactionsTable () {
 
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+
     useEffect(() => {
         api.get('transactions')
-        .then(response => console.log(response.data))
+        .then(response => setTransactions(response.data.transactions))
         .catch(err => console.error(err.message));
     }, [])
 
@@ -22,30 +34,14 @@ export function TransactionsTable () {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Desenvolvimento de website</td>
-                        <td className="deposit">R$ 12.000,00</td>
-                        <td>Desenvolvimento</td>
-                        <td>22/05/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Aluguel</td>
-                        <td className="withdraw">R$ 2.800,00</td>
-                        <td>Casa</td>
-                        <td>09/05/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Condomínio</td>
-                        <td className="withdraw">R$ 990,00</td>
-                        <td>Casa</td>
-                        <td>07/05/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Salário</td>
-                        <td className="deposit">R$ 4.600,00</td>
-                        <td>Salário</td>
-                        <td>03/05/2021</td>
-                    </tr>
+                    { transactions.map(transaction => (
+                        <tr key={transaction.id}>
+                            <td>{transaction.title}</td>
+                            <td className={`amount ${transaction.type}`}>{ toBRLCurrency(transaction.amount)}</td>
+                            <td>{transaction.category}</td>
+                            <td>{new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))}</td>
+                        </tr>
+                    )) }
                 </tbody>
             </table>
         </TransactionsTableContainer>

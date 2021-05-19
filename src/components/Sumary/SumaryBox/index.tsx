@@ -1,6 +1,5 @@
 import { BoxContainer } from "./styles";
-
-var currencyFormat = { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }
+import { toBRLCurrency } from '../../../utils';
 
 interface SumaryBoxProps {
     image: string,
@@ -16,7 +15,7 @@ export function SumaryBox({ highlight, title, image, value}: SumaryBoxProps) {
                 <p>{title}</p>
                 <img src={image} alt={title}></img> 
             </header>
-            <strong>{value.toLocaleString('pt-br', currencyFormat)}</strong>
+            <strong>{toBRLCurrency(value)}</strong>
         </BoxContainer>
     )
 }

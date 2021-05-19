@@ -25,16 +25,16 @@ export const TransactionsTableContainer = styled.div`
             color: var(--body-text);
             background-color: var(--shape);
 
+            &.amount{
+                min-width: 200px;
+            }
+
             &:first-child{
                 color: var(--text-title)
             }
 
             &.withdraw{
                 color: var(--red);
-
-                &:before{
-                    content: "- "
-                }
             }
 
             &.deposit{
