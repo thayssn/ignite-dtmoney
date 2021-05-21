@@ -23,7 +23,7 @@ type TransactionFormData = Pick<Transaction, "title" | "type" | "category" | "am
 
 interface TransactionsContextData { 
     transactions: Transaction[],
-    createTransaction: (transaction:TransactionFormData) => void;
+    createTransaction: (transaction:TransactionFormData) => Promise<void>;
 }
 
 interface TransactionsProviderProps {
@@ -41,8 +41,12 @@ export function TransactionsProvider ({ children }: TransactionsProviderProps) {
         .catch(err => console.error(err.message));
     }, [])
 
-    function createTransaction(transactionData: TransactionFormData){
-        api.post('/transactions', transactionData);
+    async function createTransaction(transactionData: TransactionFormData){
+        const response = await api.post('/transactions', {...transactionData, createdAt: new Date()});
+
+        const { transaction } = response.data;
+
+        setTransactions([...transactions, transaction]);
     }
     
     return (
