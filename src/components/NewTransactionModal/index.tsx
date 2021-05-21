@@ -1,7 +1,7 @@
-import { FormEvent, useState, useContext } from 'react';
+import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
-import { TransactionsContext } from '../../TransactionsContext';
+import { useTransactions } from '../../hooks/useTransactions';
 
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
@@ -25,12 +25,16 @@ export function NewTransactionModal ({ isOpen, onRequestClose}: NewTransactionMo
     const [transactionType, setTransactionType] = useState<'deposit' | 'withdraw'>('deposit');
     const [ transactionData , setTransactionData ] = useState<TransactionData>({} as TransactionData)
 
-    const { transactions , createTransaction } = useContext(TransactionsContext);
+    const { createTransaction } = useTransactions();
 
     const handleCreateNewTransaction = async (e: FormEvent) => {
         e.preventDefault();
 
-        const data = { ...transactionData, type: transactionType, amount: transactionType == 'deposit' ? transactionData.amount : transactionData.amount * -1};
+        const data = { ...transactionData,
+            type: transactionType,
+            amount: transactionType === 'deposit'
+                ? transactionData.amount
+                : transactionData.amount * -1};
 
         await createTransaction(data);
 
@@ -60,7 +64,7 @@ export function NewTransactionModal ({ isOpen, onRequestClose}: NewTransactionMo
                     <h2>Cadastrar Nova Transação</h2>
 
                     <input type="text" placeholder="Título" value={transactionData.title} onChange = { (e) => setTransactionData({...transactionData, title: e.target.value }) }/>
-                    <input type="number" placeholder="0" value={transactionData.amount} onChange = { (e) => setTransactionData({...transactionData, amount: Number(e.target.value) }) }/>
+                    <input type="number" min="0" placeholder="0" value={transactionData.amount} onChange = { (e) => setTransactionData({...transactionData, amount: Number(e.target.value) }) }/>
                     
                     <TransactionTypeContainer>
                         <RadioBox
