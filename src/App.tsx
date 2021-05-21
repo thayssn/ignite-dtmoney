@@ -5,10 +5,11 @@ import {NewTransactionModal} from './components/NewTransactionModal'
 import { useState } from 'react';
 import './server';
 
+import { TransactionsProvider } from './TransactionsContext';
+
 export function App() {
 
   const [ isNewTransactionModalOpen, setIsNewTransactionModalOpen ] = useState(false);
-
 
   function handleOpenNewTransactionModal () {
     setIsNewTransactionModalOpen(true)
@@ -19,11 +20,11 @@ export function App() {
   }
   
   return (
-    <>
+    <TransactionsProvider>
       <GlobalStyle />
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
       <NewTransactionModal isOpen={isNewTransactionModalOpen} onRequestClose={handleCloseNewTransactionModal} />
-    </>
+    </TransactionsProvider>
   );
 }

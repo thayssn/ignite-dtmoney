@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { useContext } from "react";
 import { TransactionsTableContainer } from "./styles";
 import { toBRLCurrency } from '../../utils'
-
-interface Transaction {
-    id: number,
-    type: string,
-    title: string,
-    amount: number,
-    category: string,
-    createdAt: string
-}
+import { TransactionsContext } from "../../TransactionsContext";
 
 export function TransactionsTable () {
 
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-    useEffect(() => {
-        api.get('transactions')
-        .then(response => setTransactions(response.data.transactions))
-        .catch(err => console.error(err.message));
-    }, [])
+    const transactions = useContext(TransactionsContext);
 
     return (
         <TransactionsTableContainer>

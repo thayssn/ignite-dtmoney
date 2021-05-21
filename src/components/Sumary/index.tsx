@@ -3,8 +3,12 @@ import income from '../../assets/income.svg';
 import outcome from '../../assets/outcome.svg';
 import total from '../../assets/total.svg';
 import { SumaryBox } from "./SumaryBox";
+import { TransactionsContext } from "../../TransactionsContext";
+import { useContext } from "react";
 
 export function Sumary() {
+    const data = useContext(TransactionsContext);
+
     return(
         <SumaryContainer>
             <SumaryBox image={income} title="Entradas" value={1000.434343}></SumaryBox>
