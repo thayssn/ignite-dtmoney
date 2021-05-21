@@ -9,11 +9,25 @@ import { useContext } from "react";
 export function Sumary() {
     const { transactions } = useContext(TransactionsContext);
 
+    const sumary = transactions.reduce((acc, transaction ) => {
+
+        if(transaction.amount >= 0 ){
+            acc.deposits += transaction.amount
+        }else{
+            acc.withdraws += transaction.amount
+        }
+
+        acc.total += transaction.amount
+
+        return acc;
+
+    } , {deposits: 0, withdraws: 0, total: 0})
+
     return(
         <SumaryContainer>
-            <SumaryBox image={income} title="Entradas" value={1000.434343}></SumaryBox>
-            <SumaryBox image={outcome} title="Saídas" value={500}></SumaryBox>
-            <SumaryBox image={total} title="Total" value={1500.43} highlight></SumaryBox>
+            <SumaryBox image={income} title="Entradas" value={sumary.deposits}></SumaryBox>
+            <SumaryBox image={outcome} title="Saídas" value={sumary.withdraws}></SumaryBox>
+            <SumaryBox image={total} title="Total" value={sumary.total} highlight highlightColor={sumary.total > 0 ? 'highlight-green' : 'highlight-red'} ></SumaryBox>
         </SumaryContainer>
     )
 }

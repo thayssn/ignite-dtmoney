@@ -5,12 +5,13 @@ interface SumaryBoxProps {
     image: string,
     title: string,
     value: number,
-    highlight?: boolean
+    highlight?: boolean,
+    highlightColor?: 'highlight-green' | 'highlight-red'
 }
 
-export function SumaryBox({ highlight, title, image, value}: SumaryBoxProps) {
+export function SumaryBox({ highlight, highlightColor, title, image, value}: SumaryBoxProps) {
     return(
-        <BoxContainer className={highlight ? 'highlight-background' : ''}>
+        <BoxContainer className={highlight ? highlightColor : ''}>
             <header>
                 <p>{title}</p>
                 <img src={image} alt={title}></img> 

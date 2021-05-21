@@ -30,7 +30,7 @@ export function NewTransactionModal ({ isOpen, onRequestClose}: NewTransactionMo
     const handleCreateNewTransaction = async (e: FormEvent) => {
         e.preventDefault();
 
-        const data = { ...transactionData, type: transactionType};
+        const data = { ...transactionData, type: transactionType, amount: transactionType == 'deposit' ? transactionData.amount : transactionData.amount * -1};
 
         await createTransaction(data);
 

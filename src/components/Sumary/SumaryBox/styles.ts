@@ -21,8 +21,13 @@ export const BoxContainer = styled.div`
         line-height: 3rem;
     }
     
-    &.highlight-background{
+    &.highlight-green{
         color: white;
         background-color: var(--green);
+    }
+
+    &.highlight-red{
+        color: white;
+        background-color: var(--red);
     }
 `
